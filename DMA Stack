@@ -1,0 +1,73 @@
+#include<stdio.h>
+#include<stdlib.h>
+int *push(int *s,int *top,int *MAX_SIZE,int elem)
+{
+    if(*top<(*MAX_SIZE)-1)
+    {
+        (*top)++;
+        s[*top]=elem;
+    }
+    else
+    {
+        *MAX_SIZE=(*MAX_SIZE)*2;
+        s=(int*)realloc(s,sizeof(int)*(*MAX_SIZE));
+        (*top)++;
+        s[*top]=elem;
+    }
+    return s;
+}
+void pop(int *s,int *top)
+{
+    if(*top!=-1)
+    {
+        printf("poped elem is %d",s[*top]);
+        (*top)--;
+    }
+    else
+    {
+        printf("no deletion\n");
+    }
+}
+void display(int *s,int top)
+{
+    printf("elem of stack are\n");
+    for(int i=0;i<=top;i++)
+    printf("%d\n",s[i]);
+    
+}
+int main()
+{
+    int *s,top=-1,elem,ch,MAX_SIZE;
+    printf("eneter max\n");
+    scanf("%d",&MAX_SIZE);
+    s=(int*)malloc(sizeof(int)*MAX_SIZE);
+    while(1)
+    {
+        printf("1.push\n");
+        printf("2.pop\n");
+        printf("3.display\n");
+        printf("4.exit\n");
+        printf("enter the choice\n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:printf("enter elm to be pushed\n");
+                    scanf("%d",&elem);
+                    //s=(int*)malloc(sizeof(int)*MAX_SIZE);
+                    s=push(s,&top,&MAX_SIZE,elem);
+                    //display(s,top);
+                    break;
+                    
+            case 2://s=(int*)malloc(sizeof(int)*MAX_SIZE);
+                    pop(s,&top);
+                    //display(s,top);
+                    break;
+                    
+            case 3:display(s,top);
+                    break;
+                    
+            case 4:exit(0);
+            default:printf("not valid\n");
+        }
+    }
+}
