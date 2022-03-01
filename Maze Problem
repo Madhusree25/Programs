@@ -1,0 +1,64 @@
+#include <stdio.h>
+#define size 3
+
+int maze[size][size]={{0,1,1},{0,0,1},{1,0,0}};
+
+
+int s[size][size];
+void display()
+{
+    int i,j;
+    for(i=0;i<size;i++)
+    {
+        for(j=0;j<size;j++)
+        {
+            printf("%d\t",s[i][j]);
+        }
+            printf("\n\n");
+        
+    }
+}
+int solvemaze(int r,int c)
+{
+    if((r==size-1) && (c==size-1))
+    {
+        s[r][c]=1;
+        return 1;
+    }    
+    if(r>=0 && c>=0 && r<size && c<size && s[r][c]==0 && maze[r][c]==0)
+    {
+             s[r][c]=1;
+            if(solvemaze(r+1,c))
+            return 1;
+            if(solvemaze(r,c+1))
+            return 1;
+            if(solvemaze(r-1,c))
+            return 1;
+            if(solvemaze(r,c-1));
+            return 1;
+            s[r][c]=0;
+            return 0;
+    }
+        return 0;
+    
+}
+int main()
+{
+    int i,j,r,c;
+   
+    for(i=0;i<r;i++)
+    {
+        for(j=0;j<c;j++)
+        {
+            s[i][j]=0;
+        }
+    }
+    if(solvemaze(0,0))
+    
+    display();
+    else
+    printf("no solution");
+    return 0;
+    
+    
+}
