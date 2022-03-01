@@ -1,0 +1,157 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node
+{
+    struct node *llink;
+    int info;
+    struct node *rlink;
+};
+typedef struct node *NODE;
+NODE getnode()
+{
+    NODE x;
+    x=(NODE)malloc(sizeof(struct node));
+    if(x==NULL)
+    {
+        printf("memeory not available\n");
+        exit(0);
+        
+    }
+    return x;
+}
+NODE insert_front(NODE first,int item)
+{
+    NODE temp;
+    temp=getnode();
+    temp->info=item;
+    temp->rlink=temp->llink=NULL;
+    if(first==NULL)
+        return temp;
+    temp->rlink=first;
+    first->llink=temp;
+    return temp;
+}
+NODE insert_rear(NODE first,int item)
+{
+    NODE temp,cur;
+    temp=getnode();
+    temp->info=item;
+    temp->rlink=temp->llink=NULL;
+    if(first==NULL)
+        return temp;
+    cur=first;
+    while(cur->rlink!=NULL)
+    {
+        cur=cur->rlink;
+    }
+    cur->rlink=temp;
+    temp->llink=cur;
+    return first; 
+}
+NODE delete_front(NODE first)
+{
+    NODE next;
+    if(first==NULL)
+    {
+        printf("no elem in dll\n");
+        return first;
+    }
+    if(first->rlink==NULL)
+    {
+        printf("deleted elem is %d",first->info);
+        free(first);
+        return NULL;
+    }
+    next=first->rlink;
+    next->llink=NULL;
+    printf("deleted elem is %d",first->info);
+    free(first);
+    return next;
+}
+NODE delete_rear(NODE first)
+{
+    NODE prev,cur;
+    if(first==NULL)
+    {
+        printf("no elem in dll\n");
+        return first;
+    }
+    prev=NULL;
+    cur=first;
+    while(cur->rlink!=NULL)
+    {
+        prev=cur;
+        cur=cur->rlink;
+    }
+    prev->rlink=NULL;
+    printf("deleted elem is %d",cur->info);
+    free(cur);
+    return first;
+}
+void display(NODE first)
+{
+    if(first==NULL)
+    {
+        printf("no elem in dll\n");
+        return;
+    }
+    NODE cur=first;
+    printf("elem in dll are\n");
+    while(cur!=NULL)
+    {
+        printf("%d\n",cur->info);
+        cur=cur->rlink;
+    }
+}
+int main()
+{
+    NODE first;
+    first=NULL;
+   int item ,ch;
+    while(1)
+    {
+        printf("\n1.insert_front\n");
+        printf("2.insert_rear\n");
+        printf("3.delete_front\n");
+        printf("4.delete_rear\n");
+        printf("5.display\n");
+        printf("6.exit\n");
+        printf("enter the choice:");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:
+            printf("enter the ele:");
+            scanf("%d",&item);
+             first=insert_front(first,item);
+            break;
+            
+            case 2:
+             printf("enter the ele:");
+             scanf("%d",&item);
+            first=insert_rear(first ,item);
+            break;
+            
+            case 3:
+            first=delete_front(first);
+            break;
+            
+            case 4:
+            first=delete_rear(first);
+            break;
+            
+            case 5:
+            display(first);
+            break;
+            
+            case 6:exit(0);
+            break;
+            
+            default:printf("not a ch\n");
+            
+            
+            
+        }
+    }
+    return 0;
+}
