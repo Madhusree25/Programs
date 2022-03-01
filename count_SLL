@@ -1,0 +1,194 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int info;
+    struct node *link;
+};
+typedef struct node *NODE;
+NODE getnode()
+{
+    NODE x;
+    x=(NODE)malloc(sizeof(struct node));
+    if(x==NULL)
+    {
+        printf("memeory not available\n");
+        exit(0);
+        
+    }
+    return x;
+}
+NODE insert_front(NODE first,int elem)
+{
+    NODE temp;
+    temp=getnode();
+    temp->info=elem;
+    temp->link=first;
+    return temp;
+}
+NODE insert_rear(NODE first,int elem)
+{
+    NODE cur,pre,temp;
+    temp=getnode();
+    temp->link=NULL;
+    temp->info=elem;
+    if(first==NULL)
+    {
+       return temp;
+       
+       
+    }
+    else
+    {
+        cur=first;
+        pre=NULL;
+        while(cur!=NULL)
+        {
+            pre=cur;
+            cur=cur->link;
+        }
+        pre->link=temp;
+        return first;
+    }
+}
+ NODE delete_front(NODE first)
+ {
+      NODE next;
+      int elem;
+      if(first==NULL)
+      {
+          printf("sll is empty\n");
+          return first;
+      }
+      else
+      {
+          elem=first->info;
+          next=first->link;
+          printf("deleted node is %d",elem);
+          free(first);
+          return next;
+      }
+ }
+ NODE delete_rear(NODE first)
+ {
+     NODE next,cur,prev;
+     int elem;
+     if(first==NULL)
+     {
+         return first;
+         
+     }
+     else if(first->link==NULL)
+     {
+         elem=first->info;
+          next=first->link;
+          printf("deleted node is %d",elem);
+          free(first);
+          return next;
+     }
+     else
+     {
+       cur=first;
+        prev=NULL;
+        while(cur->link!=NULL)
+        {
+            prev=cur;
+            cur=cur->link;
+        }
+        elem=cur->info;
+        free(cur);
+        printf("deleted elem is %d",elem);
+        prev->link=NULL;
+        return first;  
+     }
+ }
+ int count_sll(NODE first)
+{
+	int count=0;
+	NODE cur=first;
+	while(cur!=NULL)
+	{
+		count++;
+		cur=cur->link;
+	}
+	return count;
+}
+void display(NODE first)
+{
+    if(first==NULL)
+    {
+        printf("no ele");
+        return;
+        
+    }
+    
+    
+        NODE cur;
+        cur=first;
+        while(cur->link!=NULL)
+        {
+           printf("%d\t",cur->info);
+            cur=cur->link;
+        }
+        printf("%d\t",cur->info);
+        //cur=cur->link;
+        
+}
+int main()
+{
+    NODE first;
+    first=NULL;
+   int elem,ch,count;
+    while(1)
+    {
+        printf("\n1.insert_front\n");
+        printf("2.insert_rear\n");
+        printf("3.delete_front\n");
+        printf("4.delete_rear\n");
+        printf("5.display\n");
+        printf("6.count\n");
+        printf("7.exit\n");
+        printf("enter the choice:");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:
+            printf("enter the ele:");
+            scanf("%d",&elem);
+             first=insert_front(first,elem);
+            break;
+            
+            case 2:
+             printf("enter the ele:");
+             scanf("%d",&elem);
+            first=insert_rear(first ,elem);
+            break;
+            
+            case 3:
+            first=delete_front(first);
+            break;
+            
+            case 4:
+            first=delete_rear(first);
+            break;
+            
+            case 5:
+            display(first);
+            break;
+            
+            case 6:
+            count=count_sll(first);
+            printf("the no. of count is %d",count);
+            break;
+            
+            case 7:exit(0);
+            break;
+            
+            default:printf("not a ch\n");
+            
+            
+            
+        }
+    }
+    return 0;
+}
