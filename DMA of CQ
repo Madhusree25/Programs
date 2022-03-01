@@ -1,0 +1,80 @@
+#include<stdio.h>
+#include<stdlib.h>
+int *insert(int *CQ,int *rear,int *count,int ele,int *max_size)
+{
+    if(*count==*max_size)
+    {
+      printf("cq is full\n");
+    }
+    else
+    {
+        (*count)++;
+        *rear=(*rear+1)%(*max_size);
+        CQ[*rear]=ele;
+    }
+    return CQ;
+}
+void delete(int *CQ,int *front,int *count,int *max_size)
+{
+    if(*count==0)
+    {
+        printf("no elem in queue\n");
+    }
+    else
+    {
+        printf("deleted elm is %d",CQ[*front]);
+        *front=(*front+1)%(*max_size);
+        (*count)--;
+    }
+}
+void display(int *CQ,int front,int count,int max_size)
+{
+    if(count==0)
+    {
+        printf("queue is empty\n");
+    }
+    else
+    {
+        for(int i=0;i<count;i++)
+        {
+            printf("%d\t",CQ[front]);
+            front=(front+1)%max_size;
+        }
+    }
+}
+int main()
+{
+    int *CQ,count=0,front=0,ele,ch,max_size;
+    printf("enter max\n");
+    scanf("%d",&max_size);
+    int rear=max_size-1;
+    CQ=(int*)malloc(sizeof(int)*max_size);
+    while(1)
+    {
+        printf("\n 1.insert\n");
+        printf("2.delete\n");
+        printf("3.display\n");
+       
+        printf("enter the choice:");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:
+            printf("enter the ele:");
+            scanf("%d",&ele);
+           insert(CQ,&rear,&count,ele,&max_size);
+            break;
+            case 2:
+            delete(CQ,&front,&count,&max_size);
+            break;
+            case 3:
+            display(CQ,front,count,max_size);
+            break;
+            default: exit(0);
+            
+        }
+        
+    }
+    
+    
+}
