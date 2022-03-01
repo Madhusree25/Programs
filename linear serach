@@ -1,0 +1,20 @@
+include <stdio.h>
+
+int main()
+{
+   int n,i,elem,loc=0,data[100];
+   printf("enter no of elem\n");
+   scanf("%d",&n);
+   printf("enter the elems");
+   for(i=0;i<n;i++)
+    scanf("%d",&data[i]);
+    printf("enter the elem to be searched\n");
+    scanf("%d",&elem);
+    while(data[loc]!=elem)
+        loc=loc+1;
+    if(loc==n)
+        printf("unsuccessful\n");
+    else
+        printf("successfull and elem found at loc %d",loc);
+        
+}
