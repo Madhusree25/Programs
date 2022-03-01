@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include<stdlib.h>
 #define max_size 12 
 #define no_of_s 3 
 #define size_of_s 4
