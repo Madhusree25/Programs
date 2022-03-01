@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct sparse
+{
+    int row;
+    int col;
+    int value;
+};
+typedef struct sparse S;
+void accept(S*S1,int n,int m)
+{
+    int i,j,k=1,elem;
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<m;j++)
+        {
+            printf("enter the elements of row  %d and column  %d\n",i,j);
+            scanf("%d",&elem);
+            if(elem!=0)
+            {
+                 S1[k].row=i;
+                S1[k].col=j;
+                S1[k].value=elem;
+                k++;
+            }
+        }
+    }
+    S1[0].row=n;
+    S1[0].col=m;
+    S1[0].value=k-1;
+}
+void transp(S*S1,S*TS)
+{
+    TS[0].row=S1[0].col;
+    TS[0].col=S1[0].row;
+    int k=1;
+    for(int i=0;i<S1[0].col;i++)
+    {
+        for(int j=0;j<=S1[0].value;j++)
+        {
+            if(S1[j].col==i)
+            {
+            TS[k].row=S1[j].col;
+            TS[k].col=S1[j].row;
+            TS[k].value=S1[j].value;
+            k++;
+            }
+        }
+    }
+    
+    
+}
+void display(S*TS)
+{
+    int i,j;
+    int n=TS[0].row;
+    int m=TS[0].col;
+    int k=TS[0].value;
+    int TS_index=1;
+    printf(" matrix is\n");
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<m;j++)
+        {
+            if(TS[TS_index].row==i && TS[TS_index].col==j)
+            {
+                
+                printf("%d ",TS[TS_index].value);
+                TS_index++;
+            }
+            else
+            {
+                printf("0");
+    
+            }
+         printf("\t");   
+        }
+        printf("\n");
+    }
+    
+    
+}
+int main()
+{
+    S*S1;S*TS;
+    int n,m;
+    printf("enter the number of row and columns\n");
+    scanf("%d%d",&n,&m);
+    S1=(S*)malloc(sizeof(S));
+    accept(S1,n,m);
+    display(S1);
+    transp(S1,TS);
+    display(TS);
+    return 0;
+}
