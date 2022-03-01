@@ -1,0 +1,98 @@
+#include <stdio.h>
+#include<stdlib.h>
+#define max_size 12
+#define no_of_q 3
+
+void insert(int q[max_size],int r[no_of_q +1],int b[no_of_q +1],int i)
+{
+    int ele;
+    if(r[i]==b[i+1])
+    {
+        printf("full");
+        return;
+        
+    }
+    printf("enter th ele:");
+            scanf("%d",&ele);
+    r[i]=r[i]+1;
+    q[r[i]]=ele;
+    
+}
+void delete(int q[max_size],int r[no_of_q+1],int f[no_of_q],int i)
+{
+    int ele;
+    printf("enter the ele");
+            scanf("%d",&ele);
+    if(f[i]>r[i])
+    {
+        printf("queue is empty\n");
+        return;
+    }
+    ele=q[f[i]];
+    printf("deleted ele is %d",ele);
+    f[i]=f[i]+1;
+    
+}
+void display(int q[max_size],int r[no_of_q +1],int f[no_of_q ])
+{
+    int j,i;
+    for(j=0;j<no_of_q;j++)
+    {
+        
+        
+      
+        for(i=f[j];i<=r[j];i++)
+        {
+            
+        
+        printf("%d\t",q[i]);
+        }
+    }
+     
+    
+}
+int main()
+{
+    int q[max_size],r[no_of_q + 1],f[no_of_q],b[no_of_q +1],i,ch,ele,j;
+    
+    for(i=0;i<=no_of_q;i++)
+    {
+        r[i]=(max_size/no_of_q*i)-1;
+        b[i]=r[i];
+    
+    
+    }
+    for(i=0;i<no_of_q;i++)
+        f[i]=(max_size/no_of_q*i);
+        
+      
+    
+    while(1)
+    {
+        printf("\n1.insert\n");
+        printf("2.delete\n");
+        printf("3.display\n");
+        printf("4.exit\n");
+        printf("enter the  queue:");
+        scanf("%d",&i);
+        printf("enter the choice:");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:
+            insert(q,r,b,i);
+            break;
+            case 2:
+            delete(q,r,f,i);
+            
+            break;
+            case 3:
+            display(q,r,f);
+            break;
+            case 4:exit(0);
+            break;
+            default:exit(0);
+        }
+        
+    }
+}
