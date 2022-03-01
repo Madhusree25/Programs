@@ -1,0 +1,132 @@
+#include<stdio.h>
+#include<stdlib.h>
+void insert(int *Q,int *rear,int ele,int *max_size);
+void delete(int *Q,int *front,int rear);
+void display(int *Q,int front,int rear );
+int main()
+{
+    int *Q,front=0,rear=-1,ele;
+    int ch,max_size;
+     printf("enter the max_size");
+        scanf("%d",&max_size);
+        Q=(int*)malloc(sizeof(int)*max_size);
+    while(1)
+    {
+        printf("\n 1.insert\n");
+        printf("2.delete\n");
+        printf("3.display\n");
+       
+        printf("enter the choice:");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:
+            printf("enter the ele");
+            scanf("%d",&ele);
+           insert(Q,&rear,ele,&max_size);
+            break;
+            case 2:
+            delete(Q,&front,rear);
+            break;
+            case 3:
+            display(Q,front,rear);
+            break;
+            default: exit(0);
+            
+        }
+        #include<stdio.h>
+#include<stdlib.h>
+void insert(int *Q,int *rear,int ele,int *max_size);
+void delete(int *Q,int *front,int rear);
+void display(int *Q,int front,int rear );
+int main()
+{
+    int *Q,front=0,rear=-1,ele;
+    int ch,max_size;
+     printf("enter the max_size");
+        scanf("%d",&max_size);
+        Q=(int*)malloc(sizeof(int)*max_size);
+    while(1)
+    {
+        printf("\n 1.insert\n");
+        printf("2.delete\n");
+        printf("3.display\n");
+       
+        printf("enter the choice:");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:
+            printf("enter the ele");
+            scanf("%d",&ele);
+           insert(Q,&rear,ele,&max_size);
+            break;
+            case 2:
+            delete(Q,&front,rear);
+            break;
+            case 3:
+            display(Q,front,rear);
+            break;
+            default: exit(0);
+            
+        }
+    
+    }
+    
+    
+}
+void insert(int *Q,int *rear,int ele,int *max_size)
+{
+    
+   
+    
+    
+        if((*rear)<*max_size-1)
+        {
+            
+            (*rear)++;
+          Q[*rear]=ele;
+        }
+        else
+        {
+            *max_size=(*max_size)*2;
+    
+        Q=(int*)realloc(Q,sizeof(int)*(*max_size));
+         (*rear)++;
+         Q[*rear]=ele;
+           // printf("insertion not possible");
+        }
+        
+         //return Q;   
+        
+    
+}
+void delete(int *Q ,int *front,int rear)
+{
+    int elem;
+    if(*front>rear)
+    {
+        printf("queue is empty");
+        return;
+        
+    }
+    elem=Q[*front];
+    printf("deleted elem is %d",elem);
+    (*front)++;
+}
+void display(int Q[10],int front,int rear)
+{
+    int i;
+    if(front>rear)
+    {
+        printf("queue is empty:");
+        return;
+        
+    }
+    for(i=front;i<=rear;i++)
+    {
+        printf("%d\t",Q[i]);
+        
+    }
+    
+}    
